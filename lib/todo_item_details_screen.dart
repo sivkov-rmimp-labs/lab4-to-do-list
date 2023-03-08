@@ -231,7 +231,10 @@ class _TodoItemDetailsScreenState extends State<TodoItemDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: ElevatedButton(
+                child: TextButton(
+                  style: const ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(Colors.red),
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
