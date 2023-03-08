@@ -46,7 +46,7 @@ class TodoItemCard extends StatelessWidget {
               Opacity(
                 opacity: todoItem.isDone ? 0.4 : 1,
                 child: Text(
-                  todoItem.title.truncateIfLonger(35),
+                  todoItem.title.truncateIfLonger(15),
                   style: TextStyle(
                     fontSize: 16,
                     decoration: todoItem.isDone ? TextDecoration.lineThrough : null,
