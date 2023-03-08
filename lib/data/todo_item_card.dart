@@ -66,17 +66,15 @@ class TodoItemCard extends StatelessWidget {
                 ),
               Padding(
                 padding: const EdgeInsets.only(top: 6),
-                child: Chip(
-                  label: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: Icon(Icons.alarm, size: 20, color: dueDateChipColor),
-                      ),
-                      Text(todoItem.dueDate.toRussianDateOnly(), style: TextStyle(color: dueDateChipColor)),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Icon(Icons.alarm, size: 20, color: dueDateChipColor),
+                    ),
+                    Text(todoItem.dueDate.toRussianDateOnly(), style: TextStyle(color: dueDateChipColor)),
+                  ],
                 ),
               ),
             ],
