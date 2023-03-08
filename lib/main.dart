@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AnimatedBuilder(
           animation: rebuildListenable,
           builder: (context, _) {
-            final orderedToDoItems = todoItems.orderBy((x) => x.isDone ? 0 : 1).thenBy((x) => x.dueDate);
+            final orderedToDoItems = todoItems.orderBy((x) => x.isDone ? 1 : 0).thenBy((x) => x.dueDate);
             return ListView.builder(
               itemCount: todoItems.length,
               itemBuilder: (context, index) {
