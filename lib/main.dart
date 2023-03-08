@@ -115,12 +115,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: AnimatedBuilder(
           animation: rebuildListenable,
           builder: (context, _) {
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  for (final todoItem in todoItems.orderBy((x) => x.isDone ? 0 : 1).thenBy((x) => x.dueDate)) TodoItemCard(todoItem: todoItem),
-                ],
-              ),
+            final orderedToDoItems = todoItems.orderBy((x) => x.isDone ? 0 : 1).thenBy((x) => x.dueDate);
+            return ListView.builder(
+              itemCount: todoItems.length,
+              itemBuilder: (context, index) {
+                final todoItem = orderedToDoItems.elementAt(index);
+                return TodoItemCard(todoItem: todoItem);
+              },
             );
           },
         ),
