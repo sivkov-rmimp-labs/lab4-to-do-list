@@ -22,9 +22,12 @@ class TodoItemCard extends StatelessWidget {
       truncatedDescription = truncatedDescription?.truncateIfLonger(70);
     }
 
-    final dueDateChipColor = todoItem.dueDate.removeTimeComponent().isBefore(DateTime.now().removeTimeComponent()) && !todoItem.isDone
-        ? Colors.red
-        : Colors.black;
+    final dueDateChipColor =
+        todoItem.dueDate.removeTimeComponent().isBefore(DateTime.now().removeTimeComponent()) && !todoItem.isDone
+            ? Colors.red
+            : Colors.black;
+
+    final textDecoration = todoItem.isDone ? TextDecoration.lineThrough : null;
 
     return Card(
       child: InkWell(
@@ -40,44 +43,47 @@ class TodoItemCard extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Opacity(
-                opacity: todoItem.isDone ? 0.4 : 1,
-                child: Text(
+          child: Opacity(
+            opacity: todoItem.isDone ? 0.4 : 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
                   todoItem.title.truncateIfLonger(15),
                   style: TextStyle(
                     fontSize: 16,
-                    decoration: todoItem.isDone ? TextDecoration.lineThrough : null,
+                    decoration: textDecoration,
                   ),
                 ),
-              ),
-              if (truncatedDescription != null)
-                Opacity(
-                  opacity: todoItem.isDone ? 0.4 : 1,
-                  child: Text(
+                if (truncatedDescription != null)
+                  Text(
                     truncatedDescription,
                     style: TextStyle(
                       color: Colors.grey.shade600,
-                      decoration: todoItem.isDone ? TextDecoration.lineThrough : null,
+                      decoration: textDecoration,
                     ),
                   ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Icon(Icons.alarm, size: 20, color: dueDateChipColor),
+                      ),
+                      Text(
+                        todoItem.dueDate.toRussianDateOnly(),
+                        style: TextStyle(
+                          color: dueDateChipColor,
+                          decoration: textDecoration,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 4),
-                      child: Icon(Icons.alarm, size: 20, color: dueDateChipColor),
-                    ),
-                    Text(todoItem.dueDate.toRussianDateOnly(), style: TextStyle(color: dueDateChipColor)),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
